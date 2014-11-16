@@ -17,19 +17,19 @@
     
     1. 将 Prototype 文件夹中的 Prototype.framework 和 freetype.framework 复制到 /Library/Frameworks 文件夹下。
     
-        ![](Prorotype_OSX_1.png)
+        ![](Images/Prorotype_OSX_1.png)
     
     2. 打开 Xcode，创建一个新的 Command Line Tool 工程。
 
-        ![](Prorotype_OSX_2.png)
+        ![](Images/Prorotype_OSX_2.png)
         
     3. 打开工程属性，选择 TARGETS 下面的项，在右边的 Build Phases 中，展开 Link Binary With Libraries。
     
-        ![](Prorotype_OSX_3.png)
+        ![](Images/Prorotype_OSX_3.png)
         
     4. 点击左下角的加号，在弹出的模态对话框中点击 Add Other...，把 /Library/Frameworks 文件夹吓得 Prototype.framework 加入进来。这时可以看到在左边的工程浏览器中出现了这个 framework，并且可以看到它的头文件。
     
-        ![](Prorotype_OSX_4.png)
+        ![](Images/Prorotype_OSX_4.png)
         
     5. 这时就可以写代码测试了。注意在调用框架的提供函数之前，要使用 `#include <Prototype/Prototype.h>` 把框架的头文件包含进来。
     
