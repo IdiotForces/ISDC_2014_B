@@ -1,0 +1,6 @@
+framework module Prototype {
+  umbrella header "Prototype.h"
+
+  export *
+  module * { export * }
+}
