@@ -1,7 +1,11 @@
 #Project 2048 Documentation#
-####Demo 程序注释####
+####Demo 程序####
 
 ---
+
+##源程序注释##
+
+_main.cpp_
 
     //
     //  main.cpp
@@ -39,17 +43,23 @@
     #define INPUT_BUF_LEN 256
     char input_buf[INPUT_BUF_LEN] = { '\0' };
     
+    // 事件处理函数
     void event_handler(p_window *window, const p_event *event) {
     	char *p = input_buf;
     	
+    	// 根据事件类型决定如何处理事件
     	switch (event->type) {
+    	    // 该函数需要处理关闭事件，否则窗口无法关闭
     		case EVENT_CLOSE:
+    		    // 调用 p_close_window() 函数关闭窗口
     			p_close_window(window);
     			break;
     			
+    		// 键盘事件
     		case EVENT_KEYUP:
+    		       // 将当前按下的字符追加到 input_buf 的末尾
     			if (*p) while (*++p);
-    			*p++ = event->key_code;
+    			*p++ = event->key_code;    // 使用 event->key_code 获取当前按键的 ASCII 码
     			*p = '\0';
     			break;
     			
@@ -60,24 +70,26 @@
     
     int main(int argc, const char * argv[]) {
     	
-    	p_font *font_default = p_text_load_font("Ubuntu-Mono.ttf");
-    	window_args.default_font = font_default;
+    	p_font *font_default = p_text_load_font("Ubuntu-Mono.ttf"); // 载入 Ubuntu Mono 字体
+    	window_args.default_font = font_default; // 将载入的字体设置为窗口的默认字体
     	
-    	p_window *window = p_create_window(&window_args);
+    	p_window *window = p_create_window(&window_args); // 创建窗口
     	
     	while (p_handle_message(window, event_handler)) {
-    		p_graphic_clear(window, &background_color);
+    		p_graphic_clear(window, &background_color); // 清屏，为下面绘制图形做准备
     		
     		p_graphic_draw_rectangle(window, &panel_args);
     		p_graphic_draw_rectangle(window, &panel_textbox_args);
     		
     		p_graphic_draw_text(window, "Enter some text: ", &text_args_message);
+    		// 将 input_buf 中的内容 (用户键入的内容) 绘制到窗口中心
     		p_graphic_draw_text(window, input_buf, &text_args_input);
     		
-    		p_graphic_redraw(window);
+    		p_graphic_redraw(window);    // 将缓冲区中的内容显示到屏幕上
     	}
-    	
-    	p_destroy_window(window);
+    	// 当窗口退出时，p_handle_message() 返回 0，事件循环结束
+    	    	
+    	p_destroy_window(window);      // 程序退出前释放窗口所占内存
     	
         return 0;
     }

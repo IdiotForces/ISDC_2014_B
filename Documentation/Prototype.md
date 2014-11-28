@@ -86,9 +86,41 @@
 
 本部分主要聚焦于上一部分的第 4 点，即绘图部分，绘图部分又主要由两个函数来完成，即 `p_graphic_draw_rectangle()` 和 `p_graphic_draw_text()`，分别用于绘制矩形和绘制文本。
 
-* `p_graphic_draw_rectangle()` 函数。
+* `p_graphic_draw_rectangle()` 函数。在指定窗口内根据指定参数绘制一个矩形。
 
-* `p_graphic_draw_text()` 函数。
+    函数参数解释：
+    
+    * `p_window *window`. 指定要执行绘图操作的窗口。
+    
+    * `const p_rectangle_args *args` 传入一个 `p_rectangle_args` 类型的指针，指定绘制的文本属性。
+        
+        `p_rectangle_args` 结构体的具体属性如下：
+
+        * `unsigned int width`, `unsigned int height`. 指定所绘制矩形的宽度和高度，单位为像素。
+        
+        * `unsigned int x`, `unsigned int y`. 指定所绘制矩形__左上角__在窗口中的位置，单位为像素。
+        
+        * `p_color color`. 指定所绘制矩形的颜色。
+
+* `p_graphic_draw_text()` 函数。在指定窗口内根据指定参数绘制一段文字。
+
+    函数参数解释：
+    
+    * `p_window *window`. 指定要执行绘图操作的窗口。
+    
+    * `const char *text`. 指定要绘制的文本内容。
+    
+    * `const p_text_args *args` 传入一个 `p_text_args` 类型的指针，指定绘制的文本属性。
+        
+        `p_text_args` 结构体的具体属性如下：
+        
+        * `unsigned int x`, `unsigned int y`. 指定所绘制文本__中心点__在窗口中的位置，单位为像素。
+        
+        * `unsigned short size`. 指定所绘制文本的字号大小。
+        
+        * `p_color color`. 指定所绘制文本的颜色。
+        
+        * `p_font *font`. 指定绘制文本所用的字体。若为 `NULL` 则将使用当前窗口的默认字体。
 
 ---
 
